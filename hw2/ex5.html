@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Home work 2</title>
+</head>
+
+<body>
+   <script>
+      // 5. Реализовать основные 4 арифметические операции в виде функций с двумя параметрами. Обязательно использовать оператор return.
+      var a = parseInt(Math.random() * 100);
+      var b = parseInt(Math.random() * 100);
+      console.log("Число а = " + a);
+      console.log("Число b = " + b);
+      function f1(a, b) {
+         return console.log("Сумма а и b равна:" + (a + b));
+      }
+      f1(a, b);
+
+      function f2(a, b) {
+         return console.log("Разность а и b равна:" + (a - b));
+      }
+      f2(a, b);
+
+      function f3(a, b) {
+         return console.log("Произведение а и b равнo:" + (a * b));
+      }
+      f3(a, b);
+
+      function f4(a, b) {
+         return console.log("Отношение а и b равнo:" + (a / b).toFixed(2));
+      }
+      f4(a, b);
+   </script>
+</body>
+
+</html>
