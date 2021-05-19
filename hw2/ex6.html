@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Home work 2</title>
+</head>
+
+<body>
+   <script>
+      // 6. Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation), где arg1, arg2 – значения аргументов, operation – строка с названием операции. В зависимости от переданного значения операции выполнить одну из арифметических операций (использовать функции из пункта 5) и вернуть полученное значение (использовать switch).
+      var arg1 = +prompt("Введите аргумент 1");
+      var arg2 = +prompt("Введите аргумент 2");
+      var operation = prompt("Введите желаемую математическую операцию(сумма,разность,произведение,отношение)");
+      console.log("Аргумент 1 = " + arg1);
+      console.log("Аргумент 2 = " + arg2);
+      console.log("Операция: " + operation);
+      mathOperation(arg1, arg2, operation);
+      function mathOperation(arg1, arg2, operation) {
+         switch (operation) {
+            case "сумма":
+               f1(arg1, arg2);
+               break
+            case "разность":
+               f2(arg1, arg2);
+               break
+            case "произведение":
+               f3(arg1, arg2);
+               break
+            case "отношение":
+               f4(arg1, arg2);
+               break
+         }
+      }
+      function f1(arg1, arg2) {
+         return console.log("Сумма равна:" + (arg1 + arg2));
+      }
+      function f2(arg1, arg2) {
+         return console.log("Разность равна:" + (arg1 - arg2));
+      }
+      function f3(arg1, arg2) {
+         return console.log("Произведение равнo:" + (arg1 * arg2));
+      }
+      function f4(arg1, arg2) {
+         return console.log("Отношение равнo:" + (arg1 / arg2).toFixed(2));
+      }
+   </script>
+</body>
+
+</html>
