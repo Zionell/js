@@ -94,6 +94,7 @@
    </div>
 
    <script>
+      //---------------------------------------
       var desk = document.querySelector(".desk");
       var left = document.querySelector(".left");
       var up = document.querySelector(".up");
@@ -102,19 +103,25 @@
       var colNameMas = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
       var block, row;
 
-      for (var i = 8; i > 0; i--) {
-         row = document.createElement("div");
-         row.classList.add("row")
-         desk.append(row);
-         if (i % 2 == 0) {
-            box("black", "white");
-         } else {
-            box("white", "black");
+      //---------------------------------------
+      genChessDesk();
+
+      //---------------------------------------
+      function genChessDesk() {
+         for (var i = 8; i > 0; i--) {
+            row = document.createElement("div");
+            row.classList.add("row")
+            desk.append(row);
+            if (i % 2 == 0) {
+               box("black", "white");
+            } else {
+               box("white", "black");
+            }
+            up.innerHTML += "<span>" + colNameMas[8 - i] + "</span>";
+            down.innerHTML += "<span>" + colNameMas[8 - i] + "</span>";
+            left.innerHTML += "<span>" + i + "</span>";
+            right.innerHTML += "<span>" + i + "</span>";
          }
-         up.innerHTML += "<span>" + colNameMas[8 - i] + "</span>";
-         down.innerHTML += "<span>" + colNameMas[8 - i] + "</span>";
-         left.innerHTML += "<span>" + i + "</span>";
-         right.innerHTML += "<span>" + i + "</span>";
       }
       function box(color1, color2) {
          for (var i = 1; i <= 8; i++) {
@@ -130,29 +137,20 @@
             row.append(block);
          }
       }
-      var blocks = document.querySelectorAll(".block");
-      blocks[0].innerHTML = "&#9820;";
-      blocks[1].innerHTML = "&#9816;";
-      blocks[2].innerHTML = "&#9815;";
-      blocks[3].innerHTML = "&#9812;";
-      blocks[4].innerHTML = "&#9813;";
-      blocks[5].innerHTML = "&#9815;";
-      blocks[6].innerHTML = "&#9816;";
-      blocks[7].innerHTML = "&#9820;";
-      blocks[63].innerHTML = "&#9820;";
-      blocks[62].innerHTML = "&#9816;";
-      blocks[61].innerHTML = "&#9815;";
-      blocks[60].innerHTML = "&#9812;";
-      blocks[59].innerHTML = "&#9813;";
-      blocks[58].innerHTML = "&#9815;";
-      blocks[57].innerHTML = "&#9816;";
-      blocks[56].innerHTML = "&#9820;";
-      for (var i = 8; i < 16; i++) {
-         blocks[i].innerHTML = "&#9817;";
-      }
-      for (var i = 48; i < 56; i++) {
-         blocks[i].innerHTML = "&#9817;";
-      }
+
+      //---------------------------------------
+      var figureArr = ["&#9820;", "&#9816;", "&#9815;", "&#9812;", "&#9813;", "&#9815;", "&#9816;", "&#9820;"]
+      var figurePawn = "&#9817;";
+      var rowArr1 = document.querySelectorAll(".row")[1].querySelectorAll(".block");
+      var rowArr2 = document.querySelectorAll(".row")[6].querySelectorAll(".block");
+      var rowArr3 = document.querySelectorAll(".row")[0].querySelectorAll(".block");
+      var rowArr4 = document.querySelectorAll(".row")[7].querySelectorAll(".block");
+      for (var i = 0; i < 8; i++) {
+         rowArr1[i].innerHTML = figurePawn;
+         rowArr2[i].innerHTML = figurePawn;
+         rowArr3[i].innerHTML = figureArr[i];
+         rowArr4[i].innerHTML = figureArr[i];
+      };
    </script>
 </body>
 
