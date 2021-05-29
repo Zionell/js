@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Homework 4</title>
+</head>
+
+<body>
+   <script>
+      // 3. *На базе игры, созданной на уроке, реализовать игру «Кто хочет стать миллионером?»
+      function Question(question, a1, a2, a3, a4, correct, prize) {
+         this.question = question,
+            this.a1 = a1,
+            this.a2 = a2,
+            this.a3 = a3,
+            this.a4 = a4,
+            this.correct = correct,
+            this.prize = prize
+      };
+
+      //------------------------------
+      var questions = [
+         question1 = new Question(
+            "В какой из этих столиц бывших союзных республик раньше появилось метро?",
+            "а) Тбилиси",
+            "б) Ереван",
+            "в) Баку",
+            "г) Минск",
+            "а",
+            50000
+         ),
+         question2 = new Question(
+            "Какой город объявлен официальной родиной русского Деда Мороза?",
+            "а) Малая Вишера",
+            "б) Великий Устюг",
+            "в) Вышний Волочек",
+            "г) Нижний Новгород",
+            "б",
+            50000
+         ),
+         question3 = new Question(
+            "Как называется ближайшая к Земле звезда?",
+            "а) Проксиома Центавра",
+            "б) Полярная",
+            "в) Сириус",
+            "г) Солнце",
+            "г",
+            150000
+         ),
+         question4 = new Question(
+            "Что помогает запомнить мнемоническое правило «Это я знаю и помню прекрасно»?",
+            "а) Число Пи",
+            "б) Ряд активности металлов",
+            "в) Цвета радуги",
+            "г) Порядок падежей",
+            "а",
+            250000
+         ),
+         question5 = new Question(
+            "Как назывались старинные русские пушки-гаубицы?",
+            "а) Кентавр",
+            "б) Грифон",
+            "в) Василиск",
+            "г) Единорог",
+            "г",
+            500000
+         )
+      ];
+
+      //-------------------------
+      for (var item of questions) {
+         item.ev = eventFunc;
+         item.check = checkAnswer;
+      }
+      var answers = ['а', 'б', 'в', 'г'];
+      var sumPrize = 0;
+      var count = 0;
+      var i, event, ok, fireprooffSum;
+      var startGame = prompt('Здравствуйте. Хотите испытать удачу и выиграть миллион? Тогда скорее жми: Да', 'Да').toUpperCase();
+      //-------------------------
+      if (startGame == 'ДА') {
+         do {
+            i = false;
+            questions[count].ev();
+            questions[count].check();
+            if (count == 3) {
+               fireprooffSum = +prompt("Вы достигли несгораемой суммы: " + sumPrize + "\nХотите продолжить?\n Нажмите 1,если хотите продолжить или -1,если хотите забрать несгораемую сумму.")
+               switch (fireprooffSum) {
+                  case 1:
+                     i = true;
+                     break;
+                  case -1:
+                     i = false;
+                     end();
+                     break;
+                  default:
+                     i = false;
+                     break;
+               }
+            }
+         } while (i);
+      };
+
+      //---------------------------------------
+      // function startGame() {
+
+      // }
+      function eventFunc() {
+         do {
+            ok = false;
+            event = prompt(this.question + "\n" + this.a1 + "\n" + this.a2 + "\n" + this.a3 + "\n" + this.a4 + "\n" + '-1 - Выход из игры').toLowerCase();
+            if (event == -1) {
+               break;
+            }
+            else {
+               ok = isAnswer(event);
+            }
+         } while (!ok);
+      };
+      function isAnswer(event) {
+         if (answers.indexOf(event) == -1) {
+            console.log(event)
+            alert('Ваш ответ некорректный');
+            return false;
+         }
+         return true;
+      }
+      function checkAnswer() {
+         switch (event) {
+            case this.correct:
+               sumPrize += this.prize;
+               alert('Верно! Ваш выигрыш составляет: ' + sumPrize);
+               i = true;
+               count++;
+               break;
+            case "-1":
+               break;
+            default:
+               i = false;
+               alert('К сожалению, вы проиграли');
+               break;
+         }
+      }
+      function end() {
+         if (count == questions.length || count == 3) {
+            alert('Спасибо за игру. Ваш выигрыш составляет: ' + sumPrize);
+         } else {
+            alert('Спасибо за игру. Ваш выигрыш составляет: 0');
+         }
+      }
+
+      //------------------------------------------
+   </script>
+</body>
+
+</html>
