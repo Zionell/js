@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Homework 5</title>
+</head>
+<!-- 1. Создать функцию, генерирующую шахматную доску. При этом можно использовать любые html-теги по своему желанию. Доска должна быть разлинована соответствующим образом, т.е. чередовать черные и белые ячейки. Строки должны нумероваться числами от 1 до 8, столбцы – латинскими буквами A, B, C, D, E, F, G, H.
+2. Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К – король, Ф – ферзь и т.п., причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми.
+3. *Заменить буквы, обозначающие фигуры, картинками. -->
+
+<body>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      .block {
+         width: 89px;
+         height: 89px;
+         font-size: 60px;
+         text-align: center;
+      }
+
+      .row {
+         position: relative;
+         display: flex;
+      }
+
+      .spanLettersRight {
+         position: absolute;
+         right: -40px;
+         transform: translateY(-50%) rotate(180deg);
+         top: 50%;
+         font-size: 25px;
+      }
+
+      .spanLettersLeft {
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         left: -40px;
+         font-size: 25px;
+      }
+
+      .wrapper {
+         display: grid;
+         grid-template-columns: repeat(10, 90px);
+         grid-template-rows: repeat(10, 90px);
+      }
+
+      .up,
+      .down {
+         grid-column: 2/10;
+      }
+
+      .up span,
+      .right span {
+         transform: rotate(180deg);
+      }
+
+      .left,
+      .right {
+         flex-direction: column;
+         grid-row: 2/10;
+      }
+
+      .border {
+         display: flex;
+         align-items: center;
+         justify-content: space-around;
+         font-size: 25px;
+      }
+
+      .desk {
+         grid-column: 2/10;
+         grid-row: 2/10;
+         border: 5px solid black;
+         display: flex;
+         flex-direction: column;
+      }
+   </style>
+
+   <div class="wrapper">
+      <div class="up border"></div>
+      <div class="left border"></div>
+      <div class="desk"></div>
+      <div class="right border"></div>
+      <div class="down border"></div>
+   </div>
+
+   <script>
+      //---------------------------------------
+      var desk = document.querySelector(".desk");
+      var left = document.querySelector(".left");
+      var up = document.querySelector(".up");
+      var right = document.querySelector(".right");
+      var down = document.querySelector(".down");
+      var colNameMas = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+      var block, row;
+
+      //---------------------------------------
+      genChessDesk();
+
+      //---------------------------------------
+      function genChessDesk() {
+         for (var i = 8; i > 0; i--) {
+            row = document.createElement("div");
+            row.classList.add("row")
+            desk.append(row);
+            if (i % 2 == 0) {
+               box("black", "white");
+            } else {
+               box("white", "black");
+            }
+            up.innerHTML += "<span>" + colNameMas[8 - i] + "</span>";
+            down.innerHTML += "<span>" + colNameMas[8 - i] + "</span>";
+            left.innerHTML += "<span>" + i + "</span>";
+            right.innerHTML += "<span>" + i + "</span>";
+         }
+      }
+      function box(color1, color2) {
+         for (var i = 1; i <= 8; i++) {
+            block = document.createElement("p");
+            block.classList.add("block")
+            if (i % 2 == 0) {
+               block.style.background = color1;
+               block.style.color = color2;
+            } else {
+               block.style.background = color2;
+               block.style.color = color1;
+            }
+            row.append(block);
+         }
+      }
+
+      //---------------------------------------
+      var figureArr = ["&#9820;", "&#9816;", "&#9815;", "&#9812;", "&#9813;", "&#9815;", "&#9816;", "&#9820;"]
+      var figurePawn = "&#9817;";
+      var rowArr1 = document.querySelectorAll(".row")[1].querySelectorAll(".block");
+      var rowArr2 = document.querySelectorAll(".row")[6].querySelectorAll(".block");
+      var rowArr3 = document.querySelectorAll(".row")[0].querySelectorAll(".block");
+      var rowArr4 = document.querySelectorAll(".row")[7].querySelectorAll(".block");
+      for (var i = 0; i < 8; i++) {
+         rowArr1[i].innerHTML = figurePawn;
+         rowArr2[i].innerHTML = figurePawn;
+         rowArr3[i].innerHTML = figureArr[i];
+         rowArr4[i].innerHTML = figureArr[i];
+      };
+   </script>
+</body>
+
+</html>
