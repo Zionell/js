@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Homework 6</title>
+</head>
+
+<body>
+   <!-- 3) *Добавить в галерею функцию перехода к следующему изображению. По сторонам от большой картинки должны быть стрелки «вперед» и «назад», по нажатию на которые происходит замена изображения на следующее или предыдущее. -->
+
+   <style>
+      body {
+         text-align: center;
+      }
+
+      .small-img {
+         border: 10px solid red;
+         display: inline-block;
+         height: 168px;
+      }
+
+      button {
+         background: antiquewhite;
+         border: 1px solid aliceblue;
+         font-size: 20px;
+         width: 150px;
+         height: 50px;
+         border-radius: 25px;
+      }
+
+      button:hover {
+         background: rgb(233, 172, 93);
+      }
+
+      .wrap {
+         display: flex;
+         align-items: center;
+         justify-content: space-around;
+      }
+
+      .big-img {
+         border: 1px solid blue;
+         height: 500px;
+         width: 800px;
+         display: inline-block;
+         line-height: 500px;
+      }
+
+      .smallImg {
+         width: 250px;
+         height: 168px;
+      }
+
+      .bigImg {
+         width: 800px;
+         height: 500px;
+         object-fit: cover;
+      }
+
+      .smallImg:hover {
+         transform: scale(1.1);
+      }
+   </style>
+
+   <div class="wrapper">
+      <section class="small-img"></section>
+      <div class="wrap">
+         <button class="left">previous</button>
+         <section class="big-img"></section>
+         <button class="right">next</button>
+      </div>
+   </div>
+
+   <script>
+      var smallImg, bigImg;
+      var smallImgSection = document.querySelector(".small-img");
+      var bigImgSection = document.querySelector(".big-img");
+      var buttons = document.querySelectorAll("button");
+      var quantityImg = 3; //quantity images
+      var currentImg = 2;
+      //-------------------------------------
+      function createImg(img, imgClass, size, i, section) {
+         img = document.createElement("img");
+         img.className = imgClass;
+         img.id = i;
+         img.src = "img/" + size + i + ".jpg";
+         section.append(img);
+         img.onerror = function () {
+            section.innerHTML = "Изображение не найдено";
+         }
+      }
+      //----------create img's elements
+      for (var i = 1; i <= quantityImg; i++) {
+         createImg(smallImg, "smallImg", "small", i, smallImgSection);
+      }
+      createImg(bigImg, "bigImg", "big", currentImg, bigImgSection);
+      //----------get img's elements
+      var arrSmallImg = document.getElementsByClassName("smallImg");
+      //----------set property "onclick"
+      for (var i = 0; i < arrSmallImg.length; i++) {
+         arrSmallImg[i].onclick = function (e) {
+            bigImgSection.innerHTML = "";
+            createImg(bigImg, "bigImg", "big", e.target.id, bigImgSection);
+            currentImg = e.target.id;
+         }
+      }
+      for (var i = 0; i < buttons.length; i++) {
+         buttons[i].onclick = (e) => {
+            switch (e.target.className) {
+               case "left":
+                  bigImgSection.innerHTML = "";
+                  switch (currentImg) {
+                     case 1:
+                        currentImg = quantityImg;
+                        createImg(bigImg, "bigImg", "big", quantityImg, bigImgSection);
+                        break;
+                     default:
+                        currentImg--;
+                        createImg(bigImg, "bigImg", "big", currentImg, bigImgSection);
+                        break;
+                  }
+                  break;
+               case "right":
+                  bigImgSection.innerHTML = "";
+                  switch (currentImg) {
+                     case quantityImg:
+                        createImg(bigImg, "bigImg", "big", 1, bigImgSection);
+                        currentImg = 1;
+                        break;
+                     default:
+                        ++currentImg;
+                        createImg(bigImg, "bigImg", "big", currentImg, bigImgSection);
+                        break;
+                  }
+                  break;
+            }
+         }
+      }
+
+   </script>
+
+</body>
+
+</html>
